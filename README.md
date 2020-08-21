@@ -68,8 +68,8 @@ npm run serve
 
 ##### 配置介绍
 
-&emsp;&emsp;以 `VUE_APP_` 开头的变量，在代码中可以通过 `process.env.VUE_APP_` 访问。  
-&emsp;&emsp;比如,`VUE_APP_ENV = 'development'` 通过`process.env.VUE_APP_ENV` 访问。  
+&emsp;&emsp;以 `VUE_APP_` 开头的变量，在代码中可以通过 `process.env.VUE_APP_` 访问。
+&emsp;&emsp;比如,`VUE_APP_ENV = 'development'` 通过`process.env.VUE_APP_ENV` 访问。
 &emsp;&emsp;除了 `VUE_APP_*` 变量之外，在你的应用代码中始终可用的还有两个特殊的变量`NODE_ENV` 和`BASE_URL`
 
 在项目根目录中新建`.env.*`
@@ -99,10 +99,10 @@ VUE_APP_ENV = 'staging'
 VUE_APP_ENV = 'production'
 ```
 
-这里我们并没有定义很多变量，只定义了基础的 VUE_APP_ENV `development` `staging` `production`  
+这里我们并没有定义很多变量，只定义了基础的 VUE_APP_ENV `development` `staging` `production`
 变量我们统一在 `src/config/env.*.js` 里进行管理。
 
-这里有个问题，既然这里有了根据不同环境设置变量的文件，为什么还要去 config 下新建三个对应的文件呢？  
+这里有个问题，既然这里有了根据不同环境设置变量的文件，为什么还要去 config 下新建三个对应的文件呢？
 **修改起来方便，不需要重启项目，符合开发习惯。**
 
 config/index.js
@@ -136,7 +136,7 @@ console.log(baseApi)
 
 [▲ 回顶部](#top)
 
-### <span id="rem">✅ rem 适配方案 </span>
+### <span id="rem">✅ rem 适配方案 </span> 已更新为vw适配
 
 不用担心，项目已经配置好了 `rem` 适配, 下面仅做介绍：
 
@@ -159,6 +159,31 @@ module.exports = {
     'postcss-pxtorem': {
       rootValue: 37.5,
       propList: ['*']
+    }
+  }
+}
+```
+##### PostCSS 配置 vw适配 插件`postcss-px-to-viewport`
+```javascript
+// https://github.com/michael-ciniawsky/postcss-load-config
+module.exports = {
+  plugins: {
+    autoprefixer: {},
+    'postcss-px-to-viewport': {
+      // 视窗的宽度，对应的是我们设计稿的宽度，一般是750
+      viewportWidth: 375,
+      // 视窗的高度，根据750设备的宽度来指定，一般指定1334，也可以不配置
+      // viewportHeight: 1334,
+      // 指定`px`转换为视窗单位值的小数位数
+      unitPrecision: 3,
+      // 指定需要转换成的视窗单位，建议使用vw
+      viewportUnit: 'vw',
+      // 指定不转换为视窗单位的类，可以自定义，可以无限添加,建议定义一至两个通用的类名
+      selectorBlackList: ['.ignore'],
+      // 小于或等于`1px`不转换为视窗单位，你也可以设置为你想要的值
+      minPixelValue: 1,
+      // 允许在媒体查询中转换`px`
+      mediaQuery: false
     }
   }
 }
@@ -971,5 +996,5 @@ Vscode setting.json 设置
 <p>
   <img src="./static/me.png" width="256" style="display:inline;">
 </p>
- 
+
 如果对你有帮助送我一颗小星星（づ￣3￣）づ╭❤～
